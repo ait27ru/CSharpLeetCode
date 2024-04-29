@@ -5,6 +5,8 @@ namespace CSharpLeetCodeTests.MediumProblems
     [TestClass()]
     public class AddTwoNumbersSolutionTests
     {
+        private readonly AddTwoNumbersSolution _solution = new();
+
         [TestMethod()]
         public void AddTwoNumbers_ShouldSatisfy_Example1()
         {
@@ -13,7 +15,7 @@ namespace CSharpLeetCodeTests.MediumProblems
             var list2 = ListNode.createOf(5, 6, 4);
 
             // act
-            var sum = AddTwoNumbersSolution.AddTwoNumbers(list1, list2);
+            var sum = _solution.AddTwoNumbers(list1, list2);
 
             // assert
             var s = sum.ToString();
@@ -28,7 +30,7 @@ namespace CSharpLeetCodeTests.MediumProblems
             var list2 = ListNode.createOf(0);
 
             // act
-            var sum = AddTwoNumbersSolution.AddTwoNumbers(list1, list2);
+            var sum = _solution.AddTwoNumbers(list1, list2);
 
             // assert
             var s = sum.ToString();
@@ -43,7 +45,7 @@ namespace CSharpLeetCodeTests.MediumProblems
             var list2 = ListNode.createOf(9, 9, 9, 9);
 
             // act
-            var sum = AddTwoNumbersSolution.AddTwoNumbers(list1, list2);
+            var sum = _solution.AddTwoNumbers(list1, list2);
 
             // assert
             var s = sum.ToString();

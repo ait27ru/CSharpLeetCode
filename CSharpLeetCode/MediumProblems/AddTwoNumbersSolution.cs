@@ -10,7 +10,7 @@ namespace CSharpLeetCode.MediumProblems
 {
     public class AddTwoNumbersSolution
     {
-        public static ListNode? AddTwoNumbers(ListNode? list1, ListNode? list2)
+        public ListNode? AddTwoNumbers(ListNode? list1, ListNode? list2)
         {
             var root = new ListNode(0);
             var curr = root;

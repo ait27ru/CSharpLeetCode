@@ -9,9 +9,9 @@
 
 namespace CSharpLeetCode.MediumProblems
 {
-    public class CoinChange
+    public class CoinChangeSolution
     {
-        public int CoinChangeSolution(int[] coins, int amount)
+        public int CoinChange(int[] coins, int amount)
         {
             var maxAmount = amount + 1;
 

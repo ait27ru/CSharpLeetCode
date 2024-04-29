@@ -3,9 +3,9 @@
 namespace CSharpLeetCodeTests.MediumProblems
 {
     [TestClass()]
-    public class CoinChangeTests
+    public class CoinChangeSolutionTests
     {
-        private readonly CoinChange _coinChange = new();
+        private readonly CoinChangeSolution _solution = new();
 
         [TestMethod()]
         public void CoinChangeSolution_ShouldSatisfy_Example1()
@@ -15,7 +15,7 @@ namespace CSharpLeetCodeTests.MediumProblems
             int amount = 11;
 
             // act
-            var coinsNumber = _coinChange.CoinChangeSolution(coins, amount);
+            var coinsNumber = _solution.CoinChange(coins, amount);
 
             // assert
             Assert.AreEqual(3, coinsNumber);
@@ -29,7 +29,7 @@ namespace CSharpLeetCodeTests.MediumProblems
             int amount = 3;
 
             // act
-            var coinsNumber = _coinChange.CoinChangeSolution(coins, amount);
+            var coinsNumber = _solution.CoinChange(coins, amount);
 
             // assert
             Assert.AreEqual(-1, coinsNumber);
@@ -43,7 +43,7 @@ namespace CSharpLeetCodeTests.MediumProblems
             int amount = 0;
 
             // act
-            var coinsNumber = _coinChange.CoinChangeSolution(coins, amount);
+            var coinsNumber = _solution.CoinChange(coins, amount);
 
             // assert
             Assert.AreEqual(0, coinsNumber);

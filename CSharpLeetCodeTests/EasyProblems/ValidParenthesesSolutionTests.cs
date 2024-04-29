@@ -3,9 +3,9 @@
 namespace CSharpLeetCodeTests.EasyProblems
 {
     [TestClass]
-    public class ValidParenthesesTests
+    public class ValidParenthesesSolutionTests
     {
-        private ValidParentheses solution = new ValidParentheses();
+        private readonly ValidParenthesesSolution _solution = new();
 
         [TestMethod]
         public void IsValid_ShouldSatisfy_Example1()
@@ -13,7 +13,7 @@ namespace CSharpLeetCodeTests.EasyProblems
             // arrange
             var inputString = "()";
             // act
-            var result = solution.IsValid(inputString);
+            var result = _solution.IsValid(inputString);
             // assert
             Assert.IsTrue(result);
         }
@@ -24,7 +24,7 @@ namespace CSharpLeetCodeTests.EasyProblems
             // arrange
             var inputString = "()";
             // act
-            var result = solution.IsValid(inputString);
+            var result = _solution.IsValid(inputString);
             // assert
             Assert.IsTrue(result);
         }
@@ -35,7 +35,7 @@ namespace CSharpLeetCodeTests.EasyProblems
             // arrange
             var inputString = "(]";
             // act
-            var result = solution.IsValid(inputString);
+            var result = _solution.IsValid(inputString);
             // assert
             Assert.IsFalse(result);
         }
@@ -46,7 +46,7 @@ namespace CSharpLeetCodeTests.EasyProblems
             // arrange
             var inputString = "({[]})";
             // act
-            var result = solution.IsValid(inputString);
+            var result = _solution.IsValid(inputString);
             // assert
             Assert.IsTrue(result);
         }

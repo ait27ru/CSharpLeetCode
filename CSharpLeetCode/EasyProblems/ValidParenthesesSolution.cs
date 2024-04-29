@@ -12,7 +12,7 @@
 
 namespace CSharpLeetCode.EasyProblems
 {
-    public class ValidParentheses
+    public class ValidParenthesesSolution
     {
         public bool IsValid(string inputString)
         {
