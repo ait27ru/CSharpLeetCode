@@ -41,20 +41,22 @@ Time: O(e)
 Perform BFS on the graph.
 Time: O(v + e) (since each node enqued and dequeued at most once and we iterate over its neighbours (edges))
 
-Return ordered list of cities.
-Time: O (v * log(v))
+Return ordered list of cities: O(v * log(v))
+
+Combined time: O(e + v * log(v))
 
 --------------------------------
 Space Complexity:
 
-Fill the adjacency dictionary with connections.
-Space: O(v + e) since cities dictionary may store all edges
+Fill the adjacency dictionary with connections: O(v + e) since cities dictionary may store all edges and vertices
 
-Create a queue to do BFS on the graph.
-Space: O(v) since the queue can hold at most V elements
+Create a queue to do BFS on the graph: O(v) since the queue can hold at most v elements
 
-Initialise distances dictionary.
-Space: O(v)
+Initialise distances dictionary, distance to each city: O(v)
+
+Return ordered list of cities: O(v), the final list of cities can have at most v - 1 elements.
+
+Combined space: O(v + e)
 
  */
 
