@@ -41,7 +41,6 @@ namespace CSharpLeetCode.InterviewProblems
                         {
                             missingUserEntries.Add(userName);
                         }                        
-                        actionsByName.Remove(userName);
                     }
                 }
                 else
