@@ -34,37 +34,23 @@ namespace CSharpLeetCode.InterviewProblems
                 entryTimesByName[userName].Add(entryTime);
             }
 
-            foreach (var times in entryTimesByName.Values)
-            {
-                times.Sort();                
-            }
-
             foreach (var (userName, entryTimes) in entryTimesByName)
             {
                 if (entryTimes.Count < 3)
                     continue;
 
+                entryTimes.Sort();
+
                 for (int i = 0; i <= entryTimes.Count - 3; i++)
                 {
                     int startTime = entryTimes[i];
 
-                    for (int j = i + 2; j < entryTimes.Count; j++)
+                    if (entryTimes[i + 2] - startTime <= 100)
                     {
-                        if (entryTimes[j] - startTime <= 100)
-                        {
-                            // The 3rd time from startTime is within one hour
-                            result.Add((userName, entryTimes.GetRange(i, j - i + 1)));
-                            break;
-                        }
-                        if (entryTimes[j] - startTime > 100)
-                        {
-                            // The 3rd time from startTime exceeds one hour
-                            break;
-                        }
+                        // The 3rd time from startTime is within one hour
+                        if (!result.Any(r => r.Item1 == userName))
+                            result.Add((userName, entryTimes.GetRange(i, 3)));
                     }
-
-                    // If a record exists for a user, that's enough
-                    if (result.Any(r => r.Item1 == userName)) break;
                 }
             }
             return result;
