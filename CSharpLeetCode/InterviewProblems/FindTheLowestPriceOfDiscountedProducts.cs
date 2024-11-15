@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-/*
+﻿/*
 An e-commerce company is currently celebrating ten years in business. They are having a sale to honor their privileged members,
 those who have been using their services for the past five years. They receive the best discounts indicated by any discount tags attached to the product.
 Determine the minimum cost to purchase all products listed. As each potential price is calculated, truncate it to its integer part before adding it
@@ -64,67 +58,67 @@ Combined space: O(d * k)
 
  */
 
+namespace CSharpLeetCode.InterviewProblems;
 
-namespace CSharpLeetCode.InterviewProblems
+public class FindTheLowestPriceOfDiscountedProducts
 {
-    public class FindTheLowestPriceOfDiscountedProducts
+    private record Discount(int type, double amount);
+
+    public int FindLowestPrice(List<List<string>> products, List<List<string>> discounts)
     {
-        public int FindLowestPrice(List<List<string>> products, List<List<string>> discounts)
+        var discountMap = new Dictionary<string, List<Discount>>();
+
+        foreach (var discount in discounts)
         {
-            var discountMap = new Dictionary<string, List<(int type, double amount)>>();
+            var tag = discount[0];
+            var type = int.Parse(discount[1]);
+            var amount = double.Parse(discount[2]);
 
-            foreach (var discount in discounts)
+            if (!discountMap.ContainsKey(tag))
             {
-                var tag = discount[0];
-                var type = int.Parse(discount[1]);
-                var amount = double.Parse(discount[2]);
-
-                if (!discountMap.ContainsKey(tag))
-                {
-                    discountMap[tag] = new List<(int type, double amount)>();
-                }
-                discountMap[tag].Add((type, amount));
+                discountMap[tag] = new();
             }
+            discountMap[tag].Add(new Discount(type, amount));
+        }
 
-            var totalCost = 0;
+        var totalCost = 0;
 
-            foreach (var product in products)
+        foreach (var product in products)
+        {
+            double productPrice = double.Parse(product[0]);
+            double minPrice = productPrice;
+
+            for (int i = 1; i < product.Count; i++)
             {
-                double productPrice = double.Parse(product[0]);
-                double minPrice = productPrice;
+                string discountTag = product[i];
 
-                for (int i = 1; i < product.Count; i++)
+                if (discountTag == "EMPTY" || string.IsNullOrEmpty(discountTag))
+                    continue;
+
+                if (discountMap.TryGetValue(discountTag, out var productDiscounts))
                 {
-                    string productDiscountType = product[i];
-
-                    if (productDiscountType == "EMPTY" || string.IsNullOrEmpty(productDiscountType))
-                        continue;
-
-                    if (discountMap.ContainsKey(productDiscountType))
+                    foreach (var productDiscount in productDiscounts)
                     {
-                        foreach (var discount in discountMap[productDiscountType])
-                        {
-                            var discountedPrice = GetDiscountedPrice(productPrice, discount);
-                            minPrice = Math.Min(minPrice, discountedPrice);
-                        }
+                        var discountedPrice = GetDiscountedPrice(productPrice, productDiscount);
+                        minPrice = Math.Min(minPrice, discountedPrice);
                     }
                 }
-                totalCost += (int)Math.Floor(minPrice);
             }
-
-            return totalCost;
+            totalCost += (int)Math.Floor(minPrice);
         }
 
-        private double GetDiscountedPrice(double price, (int type, double amount) discount)
+        return totalCost;
+    }
+
+    private double GetDiscountedPrice(double price, Discount discount)
+    {
+        var discountedPrice = discount.type switch
         {
-            var discountedPrice = discount.type switch
-            {
-                0 => discount.amount,
-                1 => price - (price * discount.amount / 100),
-                2 => price - discount.amount,
-                _ => throw new ArgumentException($"Unknown discount type: {discount.type}")
-            };
-            return discountedPrice < 0 ? 0 : discountedPrice;
-        }
+            0 => discount.amount,
+            1 => price - (price * discount.amount / 100),
+            2 => price - discount.amount,
+            _ => throw new ArgumentException($"Unknown discount type: {discount.type}")
+        };
+        return discountedPrice < 0 ? 0 : discountedPrice;
     }
 }
