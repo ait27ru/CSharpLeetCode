@@ -15,45 +15,36 @@ If an employee meets this condition in multiple one-hour periods, return the ear
 
  */
 
-namespace CSharpLeetCode.InterviewProblems
+namespace CSharpLeetCode.InterviewProblems;
+
+public class BadgeAccessTrackerFrequentEntriesSolution
 {
-    public class BadgeAccessTrackerFrequentEntriesSolution
+    public List<(string name, List<int> times)> FindFrequentUsers(IEnumerable<(string name, int time)> records)
     {
-        public List<ValueTuple<string, List<int>>> FindFrequentUsers(IEnumerable<ValueTuple<string, int>> records)
+        var result = new List<(string name, List<int> times)>();
+
+        var timesByName = records.ToLookup(r => r.name, r => r.time);
+
+        foreach (var group in timesByName)
         {
-            var result = new List<ValueTuple<string, List<int>>>();
+            var name = group.Key;
+            var entryTimes = group.ToList();
+            entryTimes.Sort();
 
-            var entryTimesByName = new Dictionary<string, List<int>>();
+            if (entryTimes.Count < 3)
+                continue;
 
-            foreach (var (userName, entryTime) in records)
+            for (int i = 0; i <= entryTimes.Count - 3; i++)
             {
-                if (!entryTimesByName.ContainsKey(userName))
+                int startTime = entryTimes[i];
+
+                if (entryTimes[i + 2] - startTime <= 100)
                 {
-                    entryTimesByName[userName] = new List<int>();
-                }
-                entryTimesByName[userName].Add(entryTime);
-            }
-
-            foreach (var (userName, entryTimes) in entryTimesByName)
-            {
-                if (entryTimes.Count < 3)
-                    continue;
-
-                entryTimes.Sort();
-
-                for (int i = 0; i <= entryTimes.Count - 3; i++)
-                {
-                    int startTime = entryTimes[i];
-
-                    if (entryTimes[i + 2] - startTime <= 100)
-                    {
-                        // The 3rd time from startTime is within one hour
-                        if (!result.Any(r => r.Item1 == userName))
-                            result.Add((userName, entryTimes.GetRange(i, 3)));
-                    }
+                    result.Add((name, entryTimes.GetRange(i, 3)));
+                    break;
                 }
             }
-            return result;
         }
+        return result;
     }
 }

@@ -68,7 +68,7 @@ namespace CSharpLeetCodeTests.InterviewProblems
             public static readonly List<ValueTuple<string, int>> recordSet3 = new()
             {
                 ("Paul", 800), ("Paul", 805), ("Paul", 810),
-                ("Raj", 900), ("Raj", 1200), ("Raj", 1205), ("Raj", 1210)
+                ("Raj", 1200), ("Raj", 1205), ("Raj", 1210), ("Raj", 900)
             };
 
         }
