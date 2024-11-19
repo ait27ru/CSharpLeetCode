@@ -18,7 +18,7 @@ namespace CSharpLeetCode.InterviewProblems
 {
     public class BadgeAccessTrackerMatchEntriesSolution
     {
-        public ValueTuple<List<string>, List<string>> FindNonMatchingRecords(IEnumerable<ValueTuple<string, string>> records)
+        public (List<string> missingExits, List<string> missingEntries) FindNonMatchingRecords(IEnumerable<(string name, string action)> records)
         {
             var missingUserExits = new HashSet<string>();
             var missingUserEntries = new HashSet<string>();
