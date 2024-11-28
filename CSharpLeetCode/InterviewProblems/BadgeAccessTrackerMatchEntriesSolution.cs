@@ -20,50 +20,40 @@ namespace CSharpLeetCode.InterviewProblems
     {
         public (List<string> missingExits, List<string> missingEntries) FindNonMatchingRecords(IEnumerable<(string name, string action)> records)
         {
-            var missingUserExits = new HashSet<string>();
-            var missingUserEntries = new HashSet<string>();
+            var room = new HashSet<string>();
+            var missingExits = new HashSet<string>();
+            var missingEntries = new HashSet<string>();
 
             var actionsByName = new Dictionary<string, string>();
 
-            foreach (var (userName, userAction) in records)
+            foreach (var (employee, action) in records)
             {
-                if (actionsByName.ContainsKey(userName))
+                if (action == "enter")
                 {
-                    var lastUserAction = actionsByName[userName];
-
-                    if (lastUserAction == userAction)
+                    if (room.Contains(employee))
                     {
-                        if (userAction == "enter")
-                        {
-                            missingUserExits.Add(userName);
-                        }
-                        else
-                        {
-                            missingUserEntries.Add(userName);
-                        }                        
+                        missingExits.Add(employee);
+                    } else
+                    {
+                        room.Add(employee);
                     }
                 }
-                else
+                else if (action == "exit")
                 {
-                    if (userAction == "exit")
+                    if (!room.Contains(employee))
                     {
-                        missingUserEntries.Add(userName);
+                        missingEntries.Add(employee);
                     }
-                }
-
-                actionsByName[userName] = userAction;
-            }
-
-            // Handling those who entered and never exited
-            foreach (var userAction in actionsByName)
-            {
-                if (userAction.Value == "enter")
-                {
-                    missingUserExits.Add(userAction.Key);
+                    else
+                    {
+                        room.Remove(employee);
+                    }
                 }
             }
 
-            return (missingUserExits.ToList(), missingUserEntries.ToList());
+            missingExits.UnionWith(room);
+
+            return (missingExits.ToList(), missingEntries.ToList());
         }
     }
 }
