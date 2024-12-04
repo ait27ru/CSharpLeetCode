@@ -1,4 +1,4 @@
-﻿using CSharpLeetCode.InterviewProblems;
+﻿using CSharpLeetCode.InterviewProblems.Atlassian;
 
 namespace CSharpLeetCodeTests.InterviewProblems
 {

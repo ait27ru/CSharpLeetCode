@@ -1,5 +1,4 @@
-﻿
-/*
+﻿/*
 
 We are developing a security system for a badged-access room within our company's building and need to 
 identify employees who entered the secured room unusually frequently. 
@@ -15,7 +14,7 @@ If an employee meets this condition in multiple one-hour periods, return the ear
 
  */
 
-namespace CSharpLeetCode.InterviewProblems;
+namespace CSharpLeetCode.InterviewProblems.Atlassian;
 
 public class BadgeAccessTrackerFrequentEntriesSolution
 {

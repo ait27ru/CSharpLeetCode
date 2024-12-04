@@ -1,5 +1,4 @@
-﻿
-/*
+﻿/*
  * 
 We are implementing a security system for a badged-access room within our company's premises. 
 Given a sequential list of employees who used their badges to enter or exit the room, write a function that returns two collections:
@@ -14,7 +13,7 @@ Each collection should only include unique entries, regardless of how many times
 
 */
 
-namespace CSharpLeetCode.InterviewProblems
+namespace CSharpLeetCode.InterviewProblems.Atlassian
 {
     public class BadgeAccessTrackerMatchEntriesSolution
     {
@@ -33,7 +32,8 @@ namespace CSharpLeetCode.InterviewProblems
                     if (room.Contains(employee))
                     {
                         missingExits.Add(employee);
-                    } else
+                    }
+                    else
                     {
                         room.Add(employee);
                     }
